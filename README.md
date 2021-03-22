@@ -1,14 +1,14 @@
-## Pharmacy-Service-System
+# Pharmacy-Service-System
 
 This is example of pharmacy warehouse system
 
-# Features
+## Features
 
 - add or delete employee
 - add or delete medicines
 - add or delete suppliers
 
-# Technologies
+## Technologies
 
 - Java 1.8
 - Spring Boot
