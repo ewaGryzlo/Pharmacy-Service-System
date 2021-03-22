@@ -1,7 +1,7 @@
 # Pharmacy-Service-System
 
 ## Table of contents
-[General Info](#General Info)
+[General Info](##General Info)
 
 ## General Info
 
