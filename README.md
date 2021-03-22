@@ -3,7 +3,7 @@
 ## Table of contents
 [General Info](##General Info)
 
-<a name="General info"/>
+<a name="General Info"/>
 ## General Info
 
 This is example of pharmacy warehouse system. 
