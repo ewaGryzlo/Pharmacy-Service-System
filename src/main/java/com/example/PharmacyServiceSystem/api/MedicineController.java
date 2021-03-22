@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/com/example/PharmacyServiceSystem/api/medicines")
+@RequestMapping("api/test")
 @RestController
 public class MedicineController {
+
     @Autowired
     private MedicineRepository medicineRepo;
 
@@ -23,12 +24,11 @@ public class MedicineController {
     @RequestMapping("/medicines")
     public Medicine test(@RequestBody Medicine inputPayload){
         Medicine m = new Medicine();
-
         m.setMedicineName(inputPayload.getMedicineName());
         m.setMedicineCompanyName(inputPayload.getMedicineCompanyName());
+        m.setQuantity(inputPayload.getQuantity());
         m.setIfPrescription(inputPayload.isIfPrescription());
         m.setMedicinePrice(inputPayload.getMedicinePrice());
-        m.setQuantity(inputPayload.getQuantity());
         return medicineRepo.save(m) ;
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequestMapping("/com/example/PharmacyServiceSystem/api/suppliers")
+@RequestMapping("api/test")
 @RestController
 public class SupplierController {
     @Autowired

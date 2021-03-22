@@ -1,5 +1,7 @@
 package com.example.PharmacyServiceSystem.Model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,12 +18,17 @@ public class Supplier {
     @Column(name = "suppPhone")
     private String phoneNumber;
 
-//    public Supplier(int SupplierID, String companyName, String address) {
-//        this.supplierID = SupplierID;
-//        this.companyName = companyName;
-//        this.address = address;
-//        this.phoneNumber = null;
-//    }
+    @Autowired
+    public Supplier(int SupplierID, String companyName, String address) {
+        this.supplierID = SupplierID;
+        this.companyName = companyName;
+        this.address = address;
+        this.phoneNumber = null;
+    }
+    @Autowired
+    public Supplier(){
+
+    }
 
 
     public int getSupplierID() {

@@ -1,5 +1,7 @@
 package com.example.PharmacyServiceSystem.Model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,21 +18,25 @@ public class Medicine {
     @Column(name = "medPrice")
     private double medicinePrice;
     @Column(name = "prescription")
-    private boolean ifPrescription;
+    private boolean ifPrescription; //in SQL Server 0-false,1-true
     @Column(name = "medQuantity")
     protected int quantity; //quantity available in warehouse
 
-//    public Medicine(int medicineNumber, String medicineName, String medicineCompanyName,
-//                    double medicinePrice, boolean ifPrescription) {
-//        this.medicineNumber = medicineNumber;
-//        this.medicineName = medicineName;
-//        this.medicineCompanyName = medicineCompanyName;
-//        this.medicinePrice = medicinePrice;
-//        this.ifPrescription = ifPrescription;
-//        this.quantity =0;
-//    }
+    @Autowired
+    public Medicine(String medicineName, String medicineCompanyName,
+                    double medicinePrice, boolean ifPrescription) {
+        this.medicineName = medicineName;
+        this.medicineCompanyName = medicineCompanyName;
+        this.medicinePrice = medicinePrice;
+        this.ifPrescription = ifPrescription;
+        this.quantity =0;
+    }
 
-//    public void setMedicineNumber(int medicineNumber) {
+    @Autowired
+    public Medicine() {
+
+    }
+    //    public void setMedicineNumber(int medicineNumber) {
 //        this.medicineNumber = medicineNumber;
 //    }
 
