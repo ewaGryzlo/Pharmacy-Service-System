@@ -4,7 +4,9 @@
 
 ## General Info
 
-This is example of pharmacy warehouse system. It is a symulation of pharmacy warehouse, which store employees,suppliers and medicines lists. It uses lists for users like employee list, supplier list and medicinelist as extracted classes
+This is example of pharmacy warehouse system. 
+It is a symulation of pharmacy warehouse, which store employees,suppliers and medicines lists. 
+It uses lists for users like employee list, supplier list and medicinelist as extracted classes
 
 ## Features
 
