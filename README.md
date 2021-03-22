@@ -1,9 +1,9 @@
 # Pharmacy-Service-System
 
 ## Table of contents
-[General Info](##General Info)
+[General Info] 
 
-<a name="General Info"/>
+ 
 ## General Info
 
 This is example of pharmacy warehouse system. 
