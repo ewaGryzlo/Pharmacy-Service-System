@@ -1,9 +1,9 @@
 # Pharmacy-Service-System
 
 ## Table of contents
-- [General Info](##General%20Info)
-- [Features](##Features)
-- [Technologies](##Technologies)
+- [General Info](#General%20Info)
+- [Features](#Features)
+- [Technologies](#Technologies)
 
  
 ## General Info
