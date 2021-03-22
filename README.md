@@ -15,3 +15,4 @@ This is example of pharmacy warehouse system
 - Hibernate
 - Maven
 - JUnit
+- SQL Server
