@@ -26,3 +26,4 @@ It uses lists for users like employee list, supplier list and medicinelist as ex
 - Maven
 - JUnit
 - SQL Server
+- Postman for testing HTTP requests
