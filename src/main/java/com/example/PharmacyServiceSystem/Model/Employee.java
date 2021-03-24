@@ -1,10 +1,11 @@
 package com.example.PharmacyServiceSystem.Model;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import javax.persistence.*;
 
 @Entity
+@EntityScan
 @Table(name="employees")
 public class Employee  {
     @Id
@@ -12,7 +13,7 @@ public class Employee  {
 
     @Basic(optional=false)
     @Column(name ="id")
-    private int EmployeeID; //means id from databases
+    private int EmployeeID;
     @Column(name="name")
     private String name;
     @Column(name="surname")

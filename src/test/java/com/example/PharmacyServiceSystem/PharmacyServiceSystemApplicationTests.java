@@ -7,11 +7,15 @@ import org.junit.Before;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
+
 class PharmacyServiceSystemApplicationTests {
 
     @Autowired
@@ -32,8 +36,11 @@ class PharmacyServiceSystemApplicationTests {
     public void testFetchData() {
         Employee empA = employeeRepo.findByWage(2000);
         Employee empB = employeeRepo.findByWage(3000);
+        Employee empC = employeeRepo.findBySurname("Kowalska");
         assertNotNull(empA);
         assertNotNull(empB);
+        assertNotNull(empC);
+        assertEquals("Kowalska", empC.getSurname());
         assertEquals(2000, empA.getWage());
         assertEquals(3000, empB.getWage());
         Iterable employees = employeeRepo.findAll();
@@ -42,6 +49,6 @@ class PharmacyServiceSystemApplicationTests {
             count++;
             System.out.println(e);
         }
-        assertEquals(count, 2);
+        assertEquals(count, employeeRepo.count());
     }
 }
