@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,12 +45,14 @@ class PharmacyServiceSystemApplicationTests {
         assertEquals("Kowalska", empC.getSurname());
         assertEquals(2000, empA.getWage());
         assertEquals(3000, empB.getWage());
+        int count=0;
+
         Iterable employees = employeeRepo.findAll();
-        int count = 0;
         for (Object e : employees) {
             count++;
             System.out.println(e);
         }
         assertEquals(count, employeeRepo.count());
     }
+
 }

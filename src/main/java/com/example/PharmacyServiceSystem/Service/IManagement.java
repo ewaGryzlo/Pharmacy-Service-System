@@ -1,8 +1,8 @@
-package com.example.PharmacyServiceSystem.SystemManagement;
+package com.example.PharmacyServiceSystem.Service;
 
 import com.example.PharmacyServiceSystem.Model.Employee;
 import com.example.PharmacyServiceSystem.Model.Medicine;
-import com.example.PharmacyServiceSystem.Model.Supplier;
+import com.example.PharmacyServiceSystem.Model.Pharmacy;
 
 import java.util.ArrayList;
 
@@ -17,9 +17,6 @@ public interface IManagement<T> {
     default void getAllMedicinesFromWarehouse() {
     }
     default ArrayList<T> getSelectedMedicinesFromWarehouse(Medicine... medicines) {
-        return new ArrayList<>();
-    }
-    default ArrayList<Supplier> getSelectedSuppliersFromWarehouse(Supplier... suppliers) {
         return new ArrayList<>();
     }
     default ArrayList<Employee> getSelectedEmployeesFromWarehouse(Employee... employees) {

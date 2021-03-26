@@ -3,6 +3,8 @@ package com.example.PharmacyServiceSystem.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @EntityScan
@@ -10,16 +12,24 @@ import javax.persistence.*;
 public class Employee  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Basic(optional=false)
     @Column(name ="id")
     private int EmployeeID;
+
     @Column(name="name")
     private String name;
+
     @Column(name="surname")
     private String surname;
+
     @Column(name="wage")
     private int wage;
+
+    @Column(name="phoneNumber")
+    private String phoneNumber;
+
+    @Column(name="hireDate")
+    private LocalDate hireDate;
 
     @Autowired
     public Employee(String name, String surname, int wage) {
@@ -29,9 +39,37 @@ public class Employee  {
     }
 
     @Autowired
+    public Employee(int employeeID, String name, String surname, int wage, String phoneNumber, LocalDate hireDate) {
+        EmployeeID = employeeID;
+        this.name = name;
+        this.surname = surname;
+        this.wage = wage;
+        this.phoneNumber = phoneNumber;
+        this.hireDate = hireDate;
+    }
+
+    @Autowired
     public Employee(){
 
     }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public LocalDate getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(LocalDate hireDate) {
+        this.hireDate = hireDate;
+
+    }
+
 
     public void setEmployeeID(int employeeID) {
         EmployeeID = employeeID;

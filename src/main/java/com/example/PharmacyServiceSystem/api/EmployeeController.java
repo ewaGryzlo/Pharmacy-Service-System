@@ -24,10 +24,11 @@ public class EmployeeController {
     @RequestMapping("employees")
     public Employee test(@RequestBody Employee inputPayload){
         Employee e = new Employee();
-        e.setEmployeeID(inputPayload.getEmployeeID());
         e.setName(inputPayload.getName());
         e.setSurname(inputPayload.getSurname());
         e.setWage(inputPayload.getWage());
+        e.setHireDate(inputPayload.getHireDate());
+        e.setPhoneNumber(inputPayload.getPhoneNumber());
         System.out.println(e.toString());
         return employeeRepo.save(e) ;
     }
