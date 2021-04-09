@@ -5,28 +5,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
+
 @Entity
 @Table(name="orders")
 public class Orders {
     @Id
     @Column(name="order_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional=false)
     private int orderId;
 
-
-    @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.MERGE,optional = false)
-    @JoinColumn(name="pharmacy_id" , foreignKey= @ForeignKey(name="Orders_Pharmacies"),nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.MERGE)
+    @JoinColumn(name="pharmacy_id" , foreignKey= @ForeignKey(name="Orders_Pharmacies"),nullable=false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Pharmacy pharmacy;
 
 //    @OneToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL) //,orphanRemoval = true
 //    @MapsId
 //    @JoinColumn(name="order_id",foreignKey= @ForeignKey(name="orderDetailsId"))
-    @OneToOne(cascade=CascadeType.ALL, mappedBy = "orders")
-    @PrimaryKeyJoinColumn
-    private OrderDetails orderDetails;
-
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "orders")
+    private List<OrderDetails> orderDetails;
 
     @Column(name="order_date")
     private LocalDateTime orderDate;
@@ -99,5 +98,18 @@ public class Orders {
                 ", shippedDate=" + shippedDate +
                 ", shipCity='" + shipCity + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Orders)) return false;
+        Orders orders = (Orders) o;
+        return orderId == orders.orderId ;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderId);
     }
 }

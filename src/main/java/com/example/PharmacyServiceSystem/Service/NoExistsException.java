@@ -1,4 +1,4 @@
-package com.example.PharmacyServiceSystem;
+package com.example.PharmacyServiceSystem.Service;
 
 /*
 This is custom exception, which throw error message if object doesn't exists in list.

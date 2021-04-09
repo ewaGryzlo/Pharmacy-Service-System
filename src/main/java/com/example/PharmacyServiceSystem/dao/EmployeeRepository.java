@@ -7,11 +7,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
-    Employee findByWage(int wage);
 
+    Employee findByWage(int wage);
 
     @Query("SELECT e FROM Employee e  WHERE e.surname = ?1")
     Employee findBySurname(String surname);
-
 
 }

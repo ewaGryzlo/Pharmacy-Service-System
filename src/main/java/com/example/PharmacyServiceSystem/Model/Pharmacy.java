@@ -30,7 +30,7 @@ public class Pharmacy {
     @Column(name = "pharmacyPhone")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "pharmacy",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "pharmacy",cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
     @JsonIgnore
     private List<Orders> orders;
 
@@ -121,7 +121,7 @@ public class Pharmacy {
         There are overridden equals and hashCode methods.
         "If two objects are equal according to the equals(Object) method, then calling the hashCode()
         method on each of the two objects must produce the same value"
-         */
+    */
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof com.example.PharmacyServiceSystem.Model.Pharmacy)) {

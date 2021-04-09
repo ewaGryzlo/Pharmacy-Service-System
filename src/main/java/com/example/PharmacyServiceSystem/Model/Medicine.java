@@ -9,10 +9,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Currency;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name="medicines")
-//@Embeddable
 public class Medicine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,6 +52,10 @@ public class Medicine {
         this.orderDetails = orderDetails;
     }
 
+    public void setMedicineNumber(int medicineNumber) {
+        this.medicineNumber = medicineNumber;
+    }
+
     @Autowired
     public Medicine(String medicineName,BigDecimal medicinePrice, boolean ifPrescription,MedicineType medicineType) {
         this.medicineName = medicineName;
@@ -65,10 +69,6 @@ public class Medicine {
     public Medicine() {
 
     }
-    //    public void setMedicineNumber(int medicineNumber) {
-//        this.medicineNumber = medicineNumber;
-//    }
-
 
     public LocalDate getExpiryDate() {
         return expiryDate;
@@ -86,7 +86,6 @@ public class Medicine {
         this.medicineType = medicineType;
     }
 
-
     public String getMedicineName() {
         return medicineName;
     }
@@ -99,7 +98,7 @@ public class Medicine {
         this.quantity = quantity;
     }
 
-    protected int getMedicineNumber() {
+    public int getMedicineNumber() {
         return this.medicineNumber;
     }
 
@@ -122,11 +121,6 @@ public class Medicine {
     public void setMedicinePrice(BigDecimal medicinePrice) {
         this.medicinePrice = medicinePrice;
     }
-//    public void setIfPrescription(boolean ifPrescription,MedicineType medicineType) {
-//        if (medicineType == MedicineType.POM) {
-//            this.ifPrescription = ifPrescription;
-//        }
-//    }
 
     public List<OrderDetails> getOrderDetails() {
         return orderDetails;
@@ -147,5 +141,21 @@ public class Medicine {
                 ", expiryDate=" + expiryDate +
                 ", medicineType=" + medicineType +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Medicine)) return false;
+        Medicine medicine = (Medicine) o;
+        return medicineNumber == medicine.medicineNumber &&
+                medicineName.equals(medicine.medicineName) &&
+                medicinePrice.equals(medicine.medicinePrice) &&
+                orderDetails.equals(medicine.orderDetails);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(medicineNumber, medicineName, medicinePrice, orderDetails);
     }
 }

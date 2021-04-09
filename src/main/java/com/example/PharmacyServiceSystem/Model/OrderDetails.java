@@ -1,29 +1,25 @@
 package com.example.PharmacyServiceSystem.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name="order_details")
 
 public class OrderDetails {
     @Id
-    @Column(name="order_id")
-    private int orderId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    private int id;
 
-
-    @OneToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL,optional = false) //,orphanRemoval = true
-//    @MapsId
+    @ManyToOne(fetch = FetchType.LAZY,optional = false,cascade = CascadeType.MERGE) //,orphanRemoval = true
     @JoinColumn(name="order_id",foreignKey= @ForeignKey(name="OrderDetails_Orders"))
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//    @OneToOne(cascade=CascadeType.ALL, mappedBy = "orderDetails")//,orphanRemoval = true
-////    @MapsId
-//    @PrimaryKeyJoinColumn
-////    @JoinColumn(name="order_id")
     private Orders orders;
 
     @Column(name="unitPrice")
@@ -32,15 +28,13 @@ public class OrderDetails {
     @Column(name="quantity")
     private int quantity;
 
-//    @EmbeddedId
-    @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.MERGE)
-    @JoinColumn(name="medId",foreignKey= @ForeignKey(name="OrderDetails_Medicines"),nullable = false)
+    //    @EmbeddedId
+    @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.MERGE) //opcja merge w przypadku takiej relacji, bo pobieramy dane z istniejacego id ?
+    @JoinColumn(name="medId",foreignKey= @ForeignKey(name="OrderDetails_Medicines"))
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Medicine medicine;
 
-
-    public OrderDetails(int orderId, Orders orders, BigDecimal unitPrice, int quantity, Medicine medicine) {
-        this.orderId = orderId;
+    public OrderDetails(Orders orders, BigDecimal unitPrice, int quantity, Medicine medicine) {
         this.orders = orders;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
@@ -83,12 +77,27 @@ public class OrderDetails {
         this.quantity = quantity;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public int getId() {
+        return id;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setOrderDetailsId(int orderDetailsId) {
+        this.id = orderDetailsId;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof OrderDetails)) return false;
+        OrderDetails that = (OrderDetails) o;
+        return id == that.id &&
+                orders.equals(that.orders) &&
+                medicine.equals(that.medicine);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, orders, medicine);
+    }
 }
