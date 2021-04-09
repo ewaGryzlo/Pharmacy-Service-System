@@ -12,7 +12,6 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     public Employee saveNewEmployee(Employee inputPayload){
-
         Employee e = new Employee();
         e.setName(inputPayload.getName());
         e.setSurname(inputPayload.getSurname());

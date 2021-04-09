@@ -12,15 +12,11 @@ public class OrderDetailsService {
     private OrderDetailsRepository orderDetailsRepo;
 
     public OrderDetails saveNewOrderDetail(OrderDetails inputPayload) {
-
         OrderDetails od = new OrderDetails();
         od.setOrders(inputPayload.getOrders());
         od.setMedicine(inputPayload.getMedicine());
         od.setQuantity(inputPayload.getQuantity());
         od.setUnitPrice(inputPayload.getUnitPrice());
-        System.out.println(od.getUnitPrice());
-        orderDetailsRepo.save(od);
-
-        return od;
+        return orderDetailsRepo.save(od);
     }
 }

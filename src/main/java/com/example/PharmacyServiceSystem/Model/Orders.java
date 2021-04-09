@@ -7,9 +7,10 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name="orders")
+@Table(name="orders",uniqueConstraints= @UniqueConstraint(columnNames = {"order_date","ship_city","pharmacy_id"}, name = "orderConstraint"))
 public class Orders {
     @Id
     @Column(name="order_id")
@@ -25,7 +26,7 @@ public class Orders {
 //    @MapsId
 //    @JoinColumn(name="order_id",foreignKey= @ForeignKey(name="orderDetailsId"))
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "orders")
-    private List<OrderDetails> orderDetails;
+    private Set<OrderDetails> orderDetails;
 
     @Column(name="order_date")
     private LocalDateTime orderDate;
@@ -39,14 +40,6 @@ public class Orders {
     @Autowired
     public Orders(){
 
-    }
-    @Autowired
-    public Orders(int orderId, Pharmacy pharmacy, LocalDateTime orderDate, LocalDateTime shippedDate, String shipCity) {
-        this.orderId = orderId;
-        this.pharmacy = pharmacy;
-        this.orderDate = orderDate;
-        this.shippedDate = shippedDate;
-        this.shipCity = shipCity;
     }
 
     public int getOrderId() {
@@ -87,6 +80,14 @@ public class Orders {
 
     public void setShipCity(String shipCity) {
         this.shipCity = shipCity;
+    }
+
+    public Set<OrderDetails> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(Set<OrderDetails> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 
     @Override

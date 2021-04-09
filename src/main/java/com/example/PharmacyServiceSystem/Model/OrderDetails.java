@@ -4,20 +4,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name="order_details")
-
-public class OrderDetails {
+@Table(name="order_details",uniqueConstraints= @UniqueConstraint(columnNames = {"order_id", "medId"})) //columnNames  - An array of the column names that make up the constraint.
+public class OrderDetails implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false,cascade = CascadeType.MERGE) //,orphanRemoval = true
+    @ManyToOne(fetch = FetchType.LAZY,optional = false,cascade = CascadeType.MERGE)
     @JoinColumn(name="order_id",foreignKey= @ForeignKey(name="OrderDetails_Orders"))
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Orders orders;
@@ -28,18 +28,10 @@ public class OrderDetails {
     @Column(name="quantity")
     private int quantity;
 
-    //    @EmbeddedId
-    @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.MERGE) //opcja merge w przypadku takiej relacji, bo pobieramy dane z istniejacego id ?
-    @JoinColumn(name="medId",foreignKey= @ForeignKey(name="OrderDetails_Medicines"))
+    @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.MERGE)
+    @JoinColumn(name="medId",foreignKey= @ForeignKey(name="OrderDetails_Medicines"), nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Medicine medicine;
-
-    public OrderDetails(Orders orders, BigDecimal unitPrice, int quantity, Medicine medicine) {
-        this.orders = orders;
-        this.unitPrice = unitPrice;
-        this.quantity = quantity;
-        this.medicine = medicine;
-    }
 
     @Autowired
     public OrderDetails() {
@@ -85,14 +77,12 @@ public class OrderDetails {
         this.id = orderDetailsId;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof OrderDetails)) return false;
         OrderDetails that = (OrderDetails) o;
-        return id == that.id &&
-                orders.equals(that.orders) &&
+        return  orders.equals(that.orders) &&
                 medicine.equals(that.medicine);
     }
 

@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.Currency;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name="medicines")
@@ -19,7 +20,7 @@ public class Medicine {
     @Column(name = "medId")
     private int medicineNumber;
 
-    @Column(name = "medName")
+    @Column(name = "medName",unique = true)
     private String medicineName;
 
     @Column(name = "medPrice")
@@ -39,22 +40,7 @@ public class Medicine {
 
     @OneToMany(mappedBy = "medicine",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<OrderDetails> orderDetails;
-
-    public Medicine(String medicineName, BigDecimal medicinePrice, boolean ifPrescription, int quantity, LocalDate expiryDate,
-                    MedicineType medicineType, List<OrderDetails> orderDetails) {
-        this.medicineName = medicineName;
-        this.medicinePrice = medicinePrice;
-        this.ifPrescription = ifPrescription;
-        this.quantity = quantity;
-        this.expiryDate = expiryDate;
-        this.medicineType = medicineType;
-        this.orderDetails = orderDetails;
-    }
-
-    public void setMedicineNumber(int medicineNumber) {
-        this.medicineNumber = medicineNumber;
-    }
+    private Set<OrderDetails> orderDetails;
 
     @Autowired
     public Medicine(String medicineName,BigDecimal medicinePrice, boolean ifPrescription,MedicineType medicineType) {
@@ -67,7 +53,42 @@ public class Medicine {
 
     @Autowired
     public Medicine() {
+    }
 
+    public int getMedicineNumber() {
+        return medicineNumber;
+    }
+
+    public String getMedicineName() {
+        return medicineName;
+    }
+
+    public void setMedicineName(String medicineName) {
+        this.medicineName = medicineName;
+    }
+
+    public BigDecimal getMedicinePrice() {
+        return medicinePrice;
+    }
+
+    public void setMedicinePrice(BigDecimal medicinePrice) {
+        this.medicinePrice = medicinePrice;
+    }
+
+    public boolean isIfPrescription() {
+        return ifPrescription;
+    }
+
+    public void setIfPrescription(boolean ifPrescription) {
+        this.ifPrescription = ifPrescription;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public LocalDate getExpiryDate() {
@@ -86,47 +107,11 @@ public class Medicine {
         this.medicineType = medicineType;
     }
 
-    public String getMedicineName() {
-        return medicineName;
-    }
-
-    public void setMedicineName(String medicineName) {
-        this.medicineName = medicineName;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public int getMedicineNumber() {
-        return this.medicineNumber;
-    }
-
-    public BigDecimal getMedicinePrice() {
-        return this.medicinePrice;
-    }
-
-    public int getQuantity() {
-        return this.quantity;
-    }
-
-    public boolean isIfPrescription() {
-        return ifPrescription;
-    }
-
-    public void setIfPrescription(boolean ifPrescription) {
-        this.ifPrescription = ifPrescription;
-    }
-
-    public void setMedicinePrice(BigDecimal medicinePrice) {
-        this.medicinePrice = medicinePrice;
-    }
-
-    public List<OrderDetails> getOrderDetails() {
+    public Set<OrderDetails> getOrderDetails() {
         return orderDetails;
     }
 
-    public void setOrderDetails(List<OrderDetails> orderDetails) {
+    public void setOrderDetails(Set<OrderDetails> orderDetails) {
         this.orderDetails = orderDetails;
     }
 

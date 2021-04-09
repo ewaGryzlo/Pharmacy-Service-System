@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name="pharmacies")
@@ -15,7 +17,8 @@ public class Pharmacy {
     @Column(name = "pharmacy_id")
     private int pharmacyID;
 
-    @Column(name = "pharmacyCompanyName")
+
+    @Column(name = "pharmacyCompanyName",unique = true)
     private String companyName;
 
     @Column(name = "pharmacyAddress")
@@ -30,23 +33,14 @@ public class Pharmacy {
     @Column(name = "pharmacyPhone")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "pharmacy",cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
+    @OneToMany(mappedBy = "pharmacy",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Orders> orders;
+    private Set<Orders> orders;
 
     @Autowired
     public Pharmacy(){
     }
 
-    @Autowired
-    public Pharmacy(String companyName, String address, String city, String contactName, String phoneNumber, List<Orders> orders) {
-        this.companyName = companyName;
-        this.address = address;
-        this.city = city;
-        this.contactName = contactName;
-        this.phoneNumber = phoneNumber;
-        this.orders=orders;
-    }
 
     public String getAddress() {
         return address;
@@ -56,11 +50,11 @@ public class Pharmacy {
         this.address = address;
     }
 
-    public List<Orders> getOrders() {
+    public Set<Orders> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Orders> orders) {
+    public void setOrders(Set<Orders> orders) {
         this.orders = orders;
     }
 
@@ -122,22 +116,20 @@ public class Pharmacy {
         "If two objects are equal according to the equals(Object) method, then calling the hashCode()
         method on each of the two objects must produce the same value"
     */
+
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof com.example.PharmacyServiceSystem.Model.Pharmacy)) {
-            return false;
-        }
-        com.example.PharmacyServiceSystem.Model.Pharmacy pharmacy = (com.example.PharmacyServiceSystem.Model.Pharmacy) o;
-        return this.getCompanyName().equals(pharmacy.companyName);
+        if (this == o) return true;
+        if (!(o instanceof Pharmacy)) return false;
+        Pharmacy pharmacy = (Pharmacy) o;
+        return pharmacyID == pharmacy.pharmacyID &&
+                companyName.equals(pharmacy.companyName) &&
+                orders.equals(pharmacy.orders);
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 31 * hash + pharmacyID;
-        hash = 31 * hash + (companyName == null ? 0 : companyName.hashCode());
-        hash = 31 * hash + (phoneNumber == null ? 0 : phoneNumber.hashCode());
-        return hash;
+        return Objects.hash(pharmacyID, companyName, orders);
     }
 }
 

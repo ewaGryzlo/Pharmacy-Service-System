@@ -1,6 +1,5 @@
 package com.example.PharmacyServiceSystem.Service;
 
-import com.example.PharmacyServiceSystem.Model.OrderDetails;
 import com.example.PharmacyServiceSystem.Model.Orders;
 import com.example.PharmacyServiceSystem.dao.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;

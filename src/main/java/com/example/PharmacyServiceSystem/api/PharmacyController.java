@@ -6,11 +6,10 @@ import com.example.PharmacyServiceSystem.dao.PharmacyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RequestMapping("api/test")
 @RestController
 public class PharmacyController {
+
     @Autowired
     private PharmacyRepository pharmacyRepo;
 
@@ -19,8 +18,7 @@ public class PharmacyController {
 
     @GetMapping("/pharmacies")
     public Iterable<Pharmacy> getAllPharmacies() {
-        List<Pharmacy> listPharmacies = pharmacyRepo.findAll();
-        return listPharmacies;
+        return pharmacyRepo.findAll();
     }
 
     @PostMapping("/pharmacies")
