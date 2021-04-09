@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name="order_details",uniqueConstraints= @UniqueConstraint(columnNames = {"order_id", "medId"})) //columnNames  - An array of the column names that make up the constraint.
+@Table(name="order_details",uniqueConstraints= @UniqueConstraint(columnNames = {"order_id", "medId"}, name="orderDetailsConstraint")) //columnNames  - An array of the column names that make up the constraint.
 public class OrderDetails implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
