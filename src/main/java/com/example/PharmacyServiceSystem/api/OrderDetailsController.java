@@ -2,7 +2,6 @@ package com.example.PharmacyServiceSystem.api;
 
 import com.example.PharmacyServiceSystem.Model.OrderDetails;
 import com.example.PharmacyServiceSystem.Service.OrderDetailsService;
-import com.example.PharmacyServiceSystem.dao.OrderDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,14 +10,11 @@ import org.springframework.web.bind.annotation.*;
 public class OrderDetailsController {
 
     @Autowired
-    private OrderDetailsRepository orderDetailsRepo;
-
-    @Autowired
     private OrderDetailsService orderDetailsService;
 
     @GetMapping("/orderDetails")
     public Iterable<OrderDetails> getAllOrderDetails() {
-        return orderDetailsRepo.findAll();
+        return orderDetailsService.getAllOrderDetails();
     }
 
     @PostMapping("/orderDetails")

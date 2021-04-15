@@ -14,9 +14,13 @@ public class OrdersService {
     public Orders saveNewOrder(Orders inputPayload) {
         Orders o = new Orders();
         o.setOrderDate(inputPayload.getOrderDate());
-        o.setShippedDate(inputPayload.getShippedDate());
         o.setShipCity(inputPayload.getShipCity());
         o.setPharmacy(inputPayload.getPharmacy());
         return ordersRepository.save(o);
     }
+
+    public Iterable<Orders> getAllOrders() {
+        return ordersRepository.findAll();
+    }
+
 }

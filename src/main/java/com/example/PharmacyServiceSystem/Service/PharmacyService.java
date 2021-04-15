@@ -20,4 +20,8 @@ public class PharmacyService {
         ph.setPhoneNumber(inputPayload.getPhoneNumber());
         return pharmacyRepository.save(ph) ;
     }
+
+    public Iterable<Pharmacy> getAllPharmacies() {
+        return pharmacyRepository.findAll();
+    }
 }

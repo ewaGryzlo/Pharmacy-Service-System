@@ -1,8 +1,11 @@
 package com.example.PharmacyServiceSystem.Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,24 +25,21 @@ public class Orders {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Pharmacy pharmacy;
 
-//    @OneToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL) //,orphanRemoval = true
-//    @MapsId
-//    @JoinColumn(name="order_id",foreignKey= @ForeignKey(name="orderDetailsId"))
-    @OneToMany(cascade=CascadeType.ALL, mappedBy = "orders")
-    private Set<OrderDetails> orderDetails;
+    @OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.MERGE, mappedBy = "orders")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private List<OrderDetails> orderDetails;
 
     @Column(name="order_date")
     private LocalDateTime orderDate;
 
-    @Column(name="shipped_date")
-    private LocalDateTime shippedDate;
-
     @Column(name="ship_city")
     private String shipCity;
 
+    @Column(name="status")
+    private OrderStatus orderStatus;
+
     @Autowired
     public Orders(){
-
     }
 
     public int getOrderId() {
@@ -66,14 +66,6 @@ public class Orders {
         this.orderDate = orderDate;
     }
 
-    public LocalDateTime getShippedDate() {
-        return shippedDate;
-    }
-
-    public void setShippedDate(LocalDateTime shippedDate) {
-        this.shippedDate = shippedDate;
-    }
-
     public String getShipCity() {
         return shipCity;
     }
@@ -82,12 +74,21 @@ public class Orders {
         this.shipCity = shipCity;
     }
 
-    public Set<OrderDetails> getOrderDetails() {
+    public List<OrderDetails> getOrderDetails() {
         return orderDetails;
     }
 
-    public void setOrderDetails(Set<OrderDetails> orderDetails) {
+    public void setOrderDetails(List<OrderDetails> orderDetails) {
         this.orderDetails = orderDetails;
+    }
+
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     @Override
@@ -96,7 +97,6 @@ public class Orders {
                 "orderId=" + orderId +
                 ", pharmacy=" + pharmacy +
                 ", orderDate=" + orderDate +
-                ", shippedDate=" + shippedDate +
                 ", shipCity='" + shipCity + '\'' +
                 '}';
     }
@@ -113,4 +113,5 @@ public class Orders {
     public int hashCode() {
         return Objects.hash(orderId);
     }
+
 }

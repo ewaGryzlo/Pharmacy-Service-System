@@ -14,11 +14,15 @@ public class MedicineService {
     public Medicine saveNewMedicine(Medicine inputPayload){
         Medicine m = new Medicine();
         m.setMedicineName(inputPayload.getMedicineName());
-        m.setQuantity(inputPayload.getQuantity());
+        m.setQuantityStock(inputPayload.getQuantityStock());
         m.setIfPrescription(inputPayload.isIfPrescription());
         m.setMedicinePrice(inputPayload.getMedicinePrice());
         m.setExpiryDate(inputPayload.getExpiryDate());
         m.setMedicineType(inputPayload.getMedicineType());
         return medicineRepository.save(m) ;
+    }
+
+    public Iterable<Medicine> getAllMedicines() {
+        return medicineRepository.findAll();
     }
 }

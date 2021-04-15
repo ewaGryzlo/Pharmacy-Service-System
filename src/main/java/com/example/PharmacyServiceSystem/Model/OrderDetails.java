@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,7 +18,8 @@ public class OrderDetails implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY,optional = false,cascade = CascadeType.MERGE)
     @JoinColumn(name="order_id",foreignKey= @ForeignKey(name="OrderDetails_Orders"))
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler","orderDetails","pharmacy","shipCity","orderDate"})
+//    @JsonIgnore
     private Orders orders;
 
     @Column(name="unitPrice")

@@ -1,14 +1,11 @@
 package com.example.PharmacyServiceSystem.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Currency;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -30,7 +27,7 @@ public class Medicine {
     private boolean ifPrescription; //in SQL Server 0-false,1-true
 
     @Column(name = "quantity_ava")
-    protected int quantity; //quantity available in warehouse
+    protected int quantityStock; //quantity available in warehouse
 
     @Column(name= "expiryDate")
     LocalDate expiryDate;
@@ -48,7 +45,7 @@ public class Medicine {
         this.medicinePrice = medicinePrice;
         this.ifPrescription = ifPrescription;
         this.medicineType = medicineType;
-        this.quantity =0;
+        this.quantityStock =0;
     }
 
     @Autowired
@@ -83,12 +80,12 @@ public class Medicine {
         this.ifPrescription = ifPrescription;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getQuantityStock() {
+        return quantityStock;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setQuantityStock(int quantityStock) {
+        this.quantityStock = quantityStock;
     }
 
     public LocalDate getExpiryDate() {
@@ -122,7 +119,7 @@ public class Medicine {
                 ", medicineName='" + medicineName + '\'' +
                 ", medicinePrice=" + medicinePrice +
                 ", ifPrescription=" + ifPrescription +
-                ", quantity=" + quantity +
+                ", quantity=" + quantityStock +
                 ", expiryDate=" + expiryDate +
                 ", medicineType=" + medicineType +
                 '}';

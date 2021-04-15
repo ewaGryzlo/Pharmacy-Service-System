@@ -5,6 +5,8 @@ import com.example.PharmacyServiceSystem.dao.OrderDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class OrderDetailsService {
 
@@ -18,5 +20,15 @@ public class OrderDetailsService {
         od.setQuantity(inputPayload.getQuantity());
         od.setUnitPrice(inputPayload.getUnitPrice());
         return orderDetailsRepo.save(od);
+    }
+
+    public Iterable<OrderDetails> getAllOrderDetails() {
+        return orderDetailsRepo.findAll();
+    }
+
+
+    public BigDecimal getTotalPriceOfOrder(OrderDetails orderDetails){
+        return orderDetails.getUnitPrice()
+                .multiply(new BigDecimal(orderDetails.getQuantity()));
     }
 }
