@@ -9,14 +9,12 @@
 ## General Info
 
 This is example of pharmacy warehouse system. 
-It is a symulation of pharmacy warehouse, which store employees,suppliers and medicines lists. 
-It uses lists for users like employee list, supplier list and medicinelist as extracted classes
+It is a simulation of pharmacy warehouse, which store orders,clients,employees and medicines. 
 
 ## Features
 
-- add or delete employee
-- add or delete medicines
-- add or delete suppliers
+- orders management,
+- add/delete/modify/search medicines,employees,clients/orders etc.
 
 ## Technologies
 

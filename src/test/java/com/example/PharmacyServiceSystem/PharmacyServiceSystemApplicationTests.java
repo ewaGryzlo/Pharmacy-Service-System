@@ -58,7 +58,7 @@ class PharmacyServiceSystemApplicationTests {
         BigDecimal result = list.stream()
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         System.out.println(result);
-        
+
 //        for (Object e : employees) {
 //            count++;
 //            System.out.println(e);
