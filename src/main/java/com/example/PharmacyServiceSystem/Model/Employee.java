@@ -7,27 +7,27 @@ import java.time.LocalDate;
 
 @Entity
 @EntityScan
-@Table(name="employees")
-public class Employee  {
+@Table(name = "employees")
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional=false)
-    @Column(name ="id")
+    @Basic(optional = false)
+    @Column(name = "id")
     private int EmployeeID;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="surname")
+    @Column(name = "surname")
     private String surname;
 
-    @Column(name="wage")
+    @Column(name = "wage")
     private int wage;
 
-    @Column(name="phoneNumber")
+    @Column(name = "phoneNumber")
     private String phoneNumber;
 
-    @Column(name="hireDate")
+    @Column(name = "hireDate")
     private LocalDate hireDate;
 
     @Autowired
@@ -37,19 +37,7 @@ public class Employee  {
         this.wage = wage;
     }
 
-    @Autowired
-    public Employee(int employeeID, String name, String surname, int wage, String phoneNumber, LocalDate hireDate) {
-        EmployeeID = employeeID;
-        this.name = name;
-        this.surname = surname;
-        this.wage = wage;
-        this.phoneNumber = phoneNumber;
-        this.hireDate = hireDate;
-    }
-
-    @Autowired
-    public Employee(){
-
+    public Employee() {
     }
 
     public String getPhoneNumber() {
@@ -66,11 +54,6 @@ public class Employee  {
 
     public void setHireDate(LocalDate hireDate) {
         this.hireDate = hireDate;
-
-    }
-
-    public void setEmployeeID(int employeeID) {
-        EmployeeID = employeeID;
     }
 
     public int getEmployeeID() {
@@ -87,7 +70,6 @@ public class Employee  {
 
     @Override
     public String toString() {
-
         return super.toString() +
                 " ,EmployeeId=" + getEmployeeID() +
                 ", name=" + getName() +

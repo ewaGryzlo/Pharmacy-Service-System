@@ -14,11 +14,11 @@ public class EmployeeController {
 
     @GetMapping("/employees")
     public Iterable<Employee> getAllEmployeesAction() {
-        return  employeeService.getAllEmployees();
+        return employeeService.getAllEmployees();
     }
 
     @PostMapping("/employees")
-    public Employee saveNewEmployeeAction(@RequestBody Employee inputPayload){
+    public Employee saveNewEmployeeAction(@RequestBody Employee inputPayload) {
         return employeeService.saveNewEmployee(inputPayload);
     }
 }

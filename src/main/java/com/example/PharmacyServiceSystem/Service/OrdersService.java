@@ -4,12 +4,16 @@ import com.example.PharmacyServiceSystem.Model.Orders;
 import com.example.PharmacyServiceSystem.dao.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 @Service
 public class OrdersService {
 
     @Autowired
     private OrdersRepository ordersRepository;
+
+    @Autowired
+    private OrderDetailsService orderDetailsService;
 
     public Orders saveNewOrder(Orders inputPayload) {
         Orders o = new Orders();
@@ -23,4 +27,7 @@ public class OrdersService {
         return ordersRepository.findAll();
     }
 
+    public Optional getOrderById(int id) {
+        return ordersRepository.findById(id);
+    }
 }

@@ -1,11 +1,7 @@
 package com.example.PharmacyServiceSystem.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,7 +14,7 @@ public class Pharmacy {
     private int pharmacyID;
 
 
-    @Column(name = "pharmacyCompanyName",unique = true)
+    @Column(name = "pharmacyCompanyName", unique = true)
     private String companyName;
 
     @Column(name = "pharmacyAddress")
@@ -33,14 +29,12 @@ public class Pharmacy {
     @Column(name = "pharmacyPhone")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "pharmacy",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "pharmacy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Orders> orders;
 
-    @Autowired
-    public Pharmacy(){
+    public Pharmacy() {
     }
-
 
     public String getAddress() {
         return address;
@@ -107,7 +101,7 @@ public class Pharmacy {
                 ", city='" + city + '\'' +
                 ", contactName='" + contactName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", orders='" + orders + '\'' ;
+                ", orders='" + orders + '\'';
 
     }
 

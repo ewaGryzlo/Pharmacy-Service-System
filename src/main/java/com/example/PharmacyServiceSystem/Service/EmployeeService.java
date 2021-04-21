@@ -4,7 +4,6 @@ import com.example.PharmacyServiceSystem.Model.Employee;
 import com.example.PharmacyServiceSystem.Model.OrderStatus;
 import com.example.PharmacyServiceSystem.Model.Orders;
 import com.example.PharmacyServiceSystem.dao.EmployeeRepository;
-import com.example.PharmacyServiceSystem.dao.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +13,7 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @Autowired
-    private OrdersRepository ordersRepository;
-
-    public Employee saveNewEmployee(Employee inputPayload){
+    public Employee saveNewEmployee(Employee inputPayload) {
         Employee e = new Employee();
         e.setName(inputPayload.getName());
         e.setSurname(inputPayload.getSurname());
@@ -25,14 +21,14 @@ public class EmployeeService {
         e.setHireDate(inputPayload.getHireDate());
         e.setPhoneNumber(inputPayload.getPhoneNumber());
         System.out.println(e.toString());
-        return employeeRepository.save(e) ;
+        return employeeRepository.save(e);
     }
 
     public Iterable<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
 
-    public void setStatusOrder(Orders order, OrderStatus orderStatus){
+    public void setStatusOrder(Orders order, OrderStatus orderStatus) {
         if (order.getOrderStatus() == null) {
             return;
         }

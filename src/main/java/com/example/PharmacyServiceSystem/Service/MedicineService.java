@@ -5,6 +5,8 @@ import com.example.PharmacyServiceSystem.dao.MedicineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class MedicineService {
 
@@ -24,5 +26,9 @@ public class MedicineService {
 
     public Iterable<Medicine> getAllMedicines() {
         return medicineRepository.findAll();
+    }
+
+    public Optional getMedicineById(int id) {
+        return medicineRepository.findById(id);
     }
 }

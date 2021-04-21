@@ -1,8 +1,6 @@
 package com.example.PharmacyServiceSystem.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,27 +11,25 @@ import java.util.Objects;
 public class OrderDetails implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false,cascade = CascadeType.MERGE)
-    @JoinColumn(name="order_id",foreignKey= @ForeignKey(name="OrderDetails_Orders"))
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler","orderDetails","pharmacy","shipCity","orderDate"})
-//    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "order_id", foreignKey = @ForeignKey(name = "OrderDetails_Orders"))
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "orderDetails", "pharmacy", "shipCity", "orderDate"})
     private Orders orders;
 
-    @Column(name="unitPrice")
+    @Column(name = "unitPrice")
     private BigDecimal unitPrice;
 
-    @Column(name="quantity")
+    @Column(name = "quantity")
     private int quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade=CascadeType.MERGE)
-    @JoinColumn(name="medId",foreignKey= @ForeignKey(name="OrderDetails_Medicines"), nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "medId", foreignKey = @ForeignKey(name = "OrderDetails_Medicines"), nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Medicine medicine;
 
-    @Autowired
     public OrderDetails() {
     }
 
@@ -82,12 +78,12 @@ public class OrderDetails implements Serializable {
         if (this == o) return true;
         if (!(o instanceof OrderDetails)) return false;
         OrderDetails that = (OrderDetails) o;
-        return  orders.equals(that.orders) &&
+        return orders.equals(that.orders) &&
                 medicine.equals(that.medicine);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, orders, medicine);
+        return Objects.hash(id);
     }
 }

@@ -1,8 +1,6 @@
 package com.example.PharmacyServiceSystem.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -10,14 +8,14 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name="medicines")
+@Table(name = "medicines")
 public class Medicine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "medId")
     private int medicineNumber;
 
-    @Column(name = "medName",unique = true)
+    @Column(name = "medName", unique = true)
     private String medicineName;
 
     @Column(name = "medPrice")
@@ -29,26 +27,16 @@ public class Medicine {
     @Column(name = "quantity_ava")
     protected int quantityStock; //quantity available in warehouse
 
-    @Column(name= "expiryDate")
+    @Column(name = "expiryDate")
     LocalDate expiryDate;
 
     @Column
     private MedicineType medicineType;
 
-    @OneToMany(mappedBy = "medicine",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "medicine", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<OrderDetails> orderDetails;
 
-    @Autowired
-    public Medicine(String medicineName,BigDecimal medicinePrice, boolean ifPrescription,MedicineType medicineType) {
-        this.medicineName = medicineName;
-        this.medicinePrice = medicinePrice;
-        this.ifPrescription = ifPrescription;
-        this.medicineType = medicineType;
-        this.quantityStock =0;
-    }
-
-    @Autowired
     public Medicine() {
     }
 

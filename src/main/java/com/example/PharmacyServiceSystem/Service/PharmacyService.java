@@ -11,14 +11,14 @@ public class PharmacyService {
     @Autowired
     PharmacyRepository pharmacyRepository;
 
-    public Pharmacy saveNewPharmacyClient (Pharmacy inputPayload){
+    public Pharmacy saveNewPharmacyClient(Pharmacy inputPayload) {
         Pharmacy ph = new Pharmacy();
         ph.setCompanyName(inputPayload.getCompanyName());
         ph.setAddress(inputPayload.getAddress());
         ph.setCity(inputPayload.getCity());
         ph.setContactName(inputPayload.getContactName());
         ph.setPhoneNumber(inputPayload.getPhoneNumber());
-        return pharmacyRepository.save(ph) ;
+        return pharmacyRepository.save(ph);
     }
 
     public Iterable<Pharmacy> getAllPharmacies() {

@@ -18,7 +18,7 @@ public class PharmacyController {
     }
 
     @PostMapping("/pharmacies")
-    public Pharmacy saveNewPharmacyClientAction(@RequestBody Pharmacy inputPayload){
-       return pharmacyService.saveNewPharmacyClient(inputPayload);
+    public Pharmacy saveNewPharmacyClientAction(@RequestBody Pharmacy inputPayload) {
+        return pharmacyService.saveNewPharmacyClient(inputPayload);
     }
 }
