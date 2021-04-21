@@ -9,7 +9,7 @@
 ## General Info
 
 This is example of pharmacy warehouse system. 
-It is a simulation of pharmacy warehouse, which store orders,clients,employees and medicines. 
+It is a simulation of pharmacy warehouse, which stores orders,clients,employees and medicines. 
 
 ## Features
 
